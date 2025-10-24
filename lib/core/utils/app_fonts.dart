@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppFonts {
   //arabic text
-  static const TextStyle arabic = TextStyle(
+  static  TextStyle arabic = TextStyle(
     fontFamily: 'JannahLT',
-    fontSize: 80,
+    fontSize: 35.sp,
     fontWeight: FontWeight.bold,
   );
 
   // English translation
-  static const TextStyle english = TextStyle(
+  static  TextStyle english = TextStyle(
     fontFamily: 'Kamali',
     fontSize: 18,
     fontStyle: FontStyle.italic,
@@ -17,7 +18,7 @@ class AppFonts {
   );
 
   // Surah name and verse number
-  static final TextStyle meta = TextStyle(
+  static  TextStyle meta = TextStyle(
     fontFamily: 'Kamali',
     color: Colors.grey[600],
     fontSize: 14,

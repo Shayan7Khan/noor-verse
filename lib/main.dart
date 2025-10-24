@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:noor_verse/ui/screens/home_screen/home_screen.dart';
+import 'package:noor_verse/ui/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:noor_verse/ui/screens/splash_screen/splash_screen.dart';
 
 void main() {
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'NoorVerse',
-       home: SplashScreen(),),
+       home: HomeScreen(),),
     );
   }
 }
