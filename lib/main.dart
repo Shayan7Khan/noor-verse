@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:noor_verse/ui/screens/splash_screen/splash_screen.dart';
 
 void main() {
@@ -10,6 +11,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'NoorVerse', home: SplashScreen());
+    return ScreenUtilInit(
+      designSize: Size(430, 932),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'NoorVerse',
+       home: SplashScreen(),),
+    );
   }
 }
