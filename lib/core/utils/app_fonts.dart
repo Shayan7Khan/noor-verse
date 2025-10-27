@@ -11,9 +11,8 @@ class AppFonts {
 
   // English translation
   static  TextStyle english = TextStyle(
-    fontFamily: 'Kamali',
+    fontFamily: 'JannahLT',
     fontSize: 18,
-    fontStyle: FontStyle.italic,
     height: 1.5,
   );
 

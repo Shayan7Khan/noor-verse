@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:noor_verse/core/data/dummy_hadith_data.dart';
 import 'package:noor_verse/core/utils/app_fonts.dart';
+import 'package:noor_verse/ui/screens/detail_screen/detail_screen.dart';
+
 
 class HadithScreen extends StatefulWidget {
   const HadithScreen({super.key});
@@ -10,8 +13,14 @@ class HadithScreen extends StatefulWidget {
 }
 
 class _HadithScreenState extends State<HadithScreen> {
+  String query = '';
+
   @override
   Widget build(BuildContext context) {
+    final filteredHadiths = dummyHadithList
+        .where((h) => h.title.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -21,6 +30,8 @@ class _HadithScreenState extends State<HadithScreen> {
               fit: BoxFit.cover,
             ),
           ),
+
+          // Header
           Positioned(
             top: 10.h,
             child: SizedBox(
@@ -37,9 +48,9 @@ class _HadithScreenState extends State<HadithScreen> {
                   Positioned(
                     bottom: 30.h,
                     child: Text(
-                      'NoorVerse',
+                      'Hadith',
                       style: AppFonts.english.copyWith(
-                        color: Color(0xFFC0A37C),
+                        color: const Color(0xFFC0A37C),
                         fontSize: 50.sp,
                       ),
                     ),
@@ -48,6 +59,8 @@ class _HadithScreenState extends State<HadithScreen> {
               ),
             ),
           ),
+
+          // Search Bar
           Positioned(
             top: 192.h,
             left: 20.w,
@@ -57,8 +70,8 @@ class _HadithScreenState extends State<HadithScreen> {
               decoration: BoxDecoration(
                 color: Colors.black.withValues(alpha: 0.6),
                 borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(color: Color(0xFFC0A37C)),
-                boxShadow: [
+                border: Border.all(color: const Color(0xFFC0A37C)),
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black26,
                     blurRadius: 4,
@@ -67,16 +80,68 @@ class _HadithScreenState extends State<HadithScreen> {
                 ],
               ),
               child: TextField(
-                cursorColor: Color(0xFFC0A37C),
-                style: TextStyle(fontSize: 16.sp),
-                decoration: InputDecoration(
+                cursorColor: const Color(0xFFC0A37C),
+                style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                decoration: const InputDecoration(
                   hintText: 'Search...',
                   hintStyle: TextStyle(color: Colors.grey),
                   prefixIcon: Icon(Icons.search, color: Colors.grey),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(vertical: 5.h),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    query = value;
+                  });
+                },
               ),
+            ),
+          ),
+
+          // Hadith List
+          Positioned(
+            top: 250.h,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ListView.builder(
+              padding: EdgeInsets.all(16.w),
+              itemCount: filteredHadiths.length,
+              itemBuilder: (context, index) {
+                final hadith = filteredHadiths[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailScreen(
+                          title: hadith.title,
+                          mainText: hadith.arabicText,
+                          translation: hadith.englishTranslation,
+                          reference: hadith.reference,
+                          narrator: hadith.narrator,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 12.h),
+                    padding: EdgeInsets.all(16.w),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.7),
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(color: const Color(0xFFC0A37C)),
+                    ),
+                    child: Text(
+                      hadith.title,
+                      style: AppFonts.english.copyWith(
+                        fontSize: 18.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
