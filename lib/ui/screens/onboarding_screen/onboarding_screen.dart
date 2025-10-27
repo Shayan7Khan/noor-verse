@@ -48,7 +48,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: 341.25.h,
               width: 364.67.w,
             ),
-            70.verticalSpace,
+            80.verticalSpace,
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFE2BE7F),
